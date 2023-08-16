@@ -7,6 +7,8 @@
   --error: rgb(228, 46, 1);
   --spacing-one: calc(1rem * 0.5);
   --spacing-two: calc(1rem);
+
+  --font-black: #121212;
 }
 
 * {
@@ -21,11 +23,11 @@ body {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Karla', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   line-height: 1.5;
   font-size: 16px;
-  color: var(--dark);
+  color: var(--font-black);
 }
 
 h1,
@@ -134,8 +136,8 @@ input:focus {
   box-shadow: 0 0 .25rem rgba(0, 0, 0, .5);
 }
 
-.container {
-  width: 85%;
+.page-container {
+  padding: 50px 80px;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;

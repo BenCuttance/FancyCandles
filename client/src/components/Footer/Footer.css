@@ -1,0 +1,25 @@
+.footer-container {
+  height: 100px;
+  width: 100%;
+  text-align: center;
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-container .icon {
+  height: 32px;
+  width: 32px;
+  margin: 0 20px;
+  fill: #121212;
+  cursor: pointer;
+}
+
+.footer-container .icon:hover {
+  fill: #636363;
+}
+
+.footer-container > a {
+  display: block;
+  height: 32px;
+}
