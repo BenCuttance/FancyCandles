@@ -1,0 +1,26 @@
+.banner-container img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.banner-container {
+  position: relative;
+  color: #fff;
+}
+
+.banner-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  height: 400px;
+  width: 40%;
+  padding: 80px 40px;
+}
+
+.banner-heading {
+  font-family: "Cormorant Garamond";
+  font-size: 40px;
+  margin-bottom: 20px;
+}
