@@ -55,7 +55,10 @@ export default function Header(props) {
       </div>
       <div className="header-main">
         <div className="top">
-          <div className="header-logo">Fancy Candles</div>
+          <Link to="/" className="logo-link">
+            <div className="header-logo">Fancy Candles</div>
+          </Link>
+
           {renderTopNav()}
         </div>
       </div>

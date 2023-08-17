@@ -1,25 +1,47 @@
 .footer-container {
-  height: 100px;
   width: 100%;
-  text-align: center;
   margin-top: 80px;
+  padding: 80px 80px 80px 80px;
+  background: #121212;
+  color: white;
+}
+
+.footer-container .top {
   display: flex;
-  justify-content: center;
+  padding-bottom: 40px;
+}
+
+.footer-container .bottom {
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .footer-container .icon {
   height: 32px;
   width: 32px;
-  margin: 0 20px;
-  fill: #121212;
+  margin: 0 16px;
+  fill: #f5f5f5;
   cursor: pointer;
 }
 
-.footer-container .icon:hover {
-  fill: #636363;
+.footer-container .icon.first {
+  margin-left: 0;
+}
+
+.footer-container .icon.last {
+  margin-right: 0;
 }
 
 .footer-container > a {
   display: block;
   height: 32px;
+}
+
+.footer-section-heading {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.footer-section {
+  margin-right: 80px;
 }
