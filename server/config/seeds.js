@@ -403,7 +403,7 @@ db.once('open', async () => {
         category: categories[3]._id,
         description:
           'Elevate your ambiance with our boho candle pack, which includes two exquisitely designed candles and a pair of intricately detailed candle holders, all inspired by the bohemian aesthetic.',
-        image: 'bubble-Candle-Gift.jpg',
+        image: 'Homeware-table-lamp.jpg',
         price: 39.99,
         quantity: 10
       },
@@ -448,7 +448,7 @@ db.once('open', async () => {
         category: categories[3]._id,
         description:
           'Elevate your interior decor with our captivating centerpiece pack, featuring the exquisite Rattan shelf, two charming shell candles, and the boho candle kit. Designed to captivate, this ensemble effortlessly draws eyes and admiration, infusing your space with an air of natural elegance and artistic charm that\'s sure to leave a lasting impression.',
-        image: 'Homeware-table-lamp.jpg',
+        image: 'pinkCandle.png',
         price: 54.99,
         quantity: 5
       },
@@ -463,6 +463,7 @@ db.once('open', async () => {
     lastName: 'Washington',
     email: 'pamela@testmail.com',
     password: 'password12345',
+    isAdmin: true,
     orders: [
       {
         products: [products[0]._id, products[0]._id, products[1]._id]
