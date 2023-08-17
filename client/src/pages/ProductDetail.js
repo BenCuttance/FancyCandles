@@ -1,5 +1,22 @@
-import React from "react";
+
 import Button from "../components/Button/Button";
+import Cart from "../components/Cart";
+
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+
+
+import { useStoreContext } from "../utils/GlobalState";
+import {
+  REMOVE_FROM_CART,
+  UPDATE_CART_QUANTITY,
+  ADD_TO_CART,
+  UPDATE_PRODUCTS,
+} from "../utils/actions";
+import { QUERY_PRODUCTS } from "../utils/queries";
+import { idbPromise } from "../utils/helpers";
+import spinner from "../assets/spinner.gif";
 
 import "./ProductDetail.css";
 
@@ -14,20 +31,92 @@ const product = {
 };
 
 const ProductDetail = () => {
+
+  const [state, dispatch] = useStoreContext();
+  const { id } = useParams();
+
+  const [currentProduct, setCurrentProduct] = useState({});
+
+  const { loading, data } = useQuery(QUERY_PRODUCTS);
+
+  const { products, cart } = state;
+
+  useEffect(() => {
+    // already in global store
+    if (products.length) {
+      setCurrentProduct(products.find((product) => product._id === id));
+    }
+    // retrieved from server
+    else if (data) {
+      dispatch({
+        type: UPDATE_PRODUCTS,
+        products: data.products,
+      });
+
+      data.products.forEach((product) => {
+        idbPromise("products", "put", product);
+      });
+    }
+    // get cache from idb
+    else if (!loading) {
+      idbPromise("products", "get").then((indexedProducts) => {
+        dispatch({
+          type: UPDATE_PRODUCTS,
+          products: indexedProducts,
+        });
+      });
+    }
+  }, [products, data, loading, dispatch, id]);
+
+  const addToCart = () => {
+    const itemInCart = cart.find((cartItem) => cartItem._id === id);
+    if (itemInCart) {
+      dispatch({
+        type: UPDATE_CART_QUANTITY,
+        _id: id,
+        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+      });
+      idbPromise("cart", "put", {
+        ...itemInCart,
+        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+      });
+    } else {
+      dispatch({
+        type: ADD_TO_CART,
+        product: { ...currentProduct, purchaseQuantity: 1 },
+      });
+      idbPromise("cart", "put", { ...currentProduct, purchaseQuantity: 1 });
+    }
+  };
+
+
+  const removeFromCart = () => {
+    dispatch({
+      type: REMOVE_FROM_CART,
+      _id: currentProduct._id,
+    });
+
+    idbPromise('cart', 'delete', { ...currentProduct });
+  };
+
+
   return (
     <div className="product-detail-page">
       <img src={`/images/${product.image}`} />
       <div className="product-detail-content">
         <div className="product-name">{product.name.toUpperCase()}</div>
         <p className="product-description">{product.description}</p>
-        <div className="product-price">AUD {product.price}</div>
+        <div className="product-price">AUD {product.price}{' '}</div>
 
-        <Button variant="ghost" style={{ width: "100%" }}>
+        <Button onClick={addToCart} variant="ghost" style={{ width: "100%" }}>
           ADD TO CART
         </Button>
       </div>
+      <Cart />
     </div>
   );
 };
 
 export default ProductDetail;
+
+

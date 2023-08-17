@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import BrowseProductList from "../components/ProductList/BrowseProductList";
 import "./Category.css";
+import Cart from "../components/Cart";
 
 const categories = [
   {
@@ -108,13 +109,16 @@ const Category = () => {
   const category = categories[0];
 
   return (
-    <div className="category-page-container">
-      <img
-        className="category-banner"
-        src={`/images/${category.imageBanner}`}
-      />
-      <h1 className="category-page-heading">{category.name}</h1>
-      <BrowseProductList products={products} />
+    <div>
+      <div className="category-page-container">
+        <img
+          className="category-banner"
+          src={`/images/${category.imageBanner}`}
+        />
+        <h1 className="category-page-heading">{category.name}</h1>
+        <BrowseProductList products={products} />
+      </div>
+      <Cart />
     </div>
   );
 };
