@@ -1,0 +1,35 @@
+.product-detail-page {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 60px;
+}
+
+.product-detail-content {
+  max-width: 500px;
+}
+
+.product-detail-page img {
+  height: 600px;
+  object-fit: cover;
+}
+
+.product-detail-page .product-name {
+  font-family: "Cormorant Garamond";
+  font-weight: 600;
+  font-size: 40px;
+  margin-bottom: 40px;
+  border-bottom: 4px solid #121212;
+  padding-bottom: 20px;
+}
+
+.product-detail-page .product-description {
+  color: #292929;
+  margin-bottom: 40px;
+}
+
+.product-detail-page .product-price {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 20px;
+}

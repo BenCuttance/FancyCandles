@@ -20,6 +20,18 @@ button[disabled] {
   background-color: #c4a795;
 }
 
+.ghost {
+  border: 2px solid #121212;
+  color: #121212;
+  background: transparent;
+}
+
+.ghost:hover {
+  border: 2px solid #121212;
+  color: white;
+  background: #121212;
+}
+
 .ghost-dark {
   border: 2px solid white;
   color: white;
