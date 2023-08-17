@@ -12,6 +12,7 @@
 .product-detail-page img {
   height: 600px;
   object-fit: cover;
+  margin-right: 40px;
 }
 
 .product-detail-page .product-name {

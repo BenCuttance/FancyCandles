@@ -71,16 +71,6 @@ p {
   margin-top: 0;
 }
 
-a {
-  color: var(--tertiary);
-  text-decoration: none;
-  font-weight: bold;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
 header {
   background: var(--primary);
 }
