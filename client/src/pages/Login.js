@@ -3,11 +3,13 @@ import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
+import { useStoreContext } from '../utils/GlobalState'
+import { DECODE_TOKEN } from '../utils/actions';
 
 function Login(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN);
-
+  let [state, dispatch] = useStoreContext();
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -15,7 +17,16 @@ function Login(props) {
         variables: { email: formState.email, password: formState.password },
       });
       const token = mutationResponse.data.login.token;
+      // let decoded = Auth.getDecodedToken(token);
+      // console.log('new token beeop', decoded)
       Auth.login(token);
+
+      //if succesful navigates to next page
+      
+      // dispatch({
+      //   type: DECODE_TOKEN,
+      //   decoded
+      // });
     } catch (e) {
       console.log(e);
     }
