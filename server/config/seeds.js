@@ -396,7 +396,62 @@ db.once('open', async () => {
       image: 'Homeware-table-lamp.jpg',
       price: 27.99,
       quantity: 10
-    }
+    },
+       //_____________ SEED GIFTS __________________
+       {
+        name: 'Boho Pack',
+        category: categories[3]._id,
+        description:
+          'Elevate your ambiance with our boho candle pack, which includes two exquisitely designed candles and a pair of intricately detailed candle holders, all inspired by the bohemian aesthetic.',
+        image: 'bubble-Candle-Gift.jpg',
+        price: 39.99,
+        quantity: 10
+      },
+      {
+        name: 'Diffuser Gift Pack',
+        category: categories[3]._id,
+        description:
+          'Immerse yourself in the ultimate aromatic experience with our luxurious diffuser gift pack. This exquisite set features our elegant wood light diffuser accompanied by a curated selection of five distinct oils, including refreshing peppermint, warming cinnamon, soothing lavender, and the uplifting scents of orange and bergamot. With this collection, you\'ll have a myriad of wonderful options to explore and create your perfect ambience',
+        image: 'Homeware-table-lamp.jpg',
+        price: 44.99,
+        quantity: 10
+      },
+      {
+        name: 'Gift Pack for Her',
+        category: categories[3]._id,
+        description:
+          'Indulge her senses in pure delight with a thoughtful gift set that includes two enchanting bedroom candles, a mesmerizing crystal diffuser, and a trio of special oils. Elevate the mood with the captivating aromas of tea tree, patchouli, and cinnamon, creating an ambiance that\'s as unique as it is enchanting.',
+        image: 'Homeware-table-lamp.jpg',
+        price: 49.99,
+        quantity: 10
+      },
+      {
+        name: 'Gift Pack for Him',
+        category: categories[3]._id,
+        description:
+          'Unveil a world of sophistication with our distinguished gift pack designed for him. Featuring the rich allure of the Verone leather candle and complemented by a sleek flame diffuser, this set comes complete with three invigorating oils: bergamot, lime, and grapefruit. Elevate his surroundings with a blend of refined scents that mirror his distinctive style and taste',
+        image: 'Homeware-table-lamp.jpg',
+        price: 49.99,
+        quantity: 10
+      },
+      {
+        name: 'Homewares Collection Pack',
+        category: categories[3]._id,
+        description:
+          'Transform your living space into a haven of comfort and charm with our homeware collection pack. Enveloping you in coziness, this set includes two plush cushions, a stylish couch cover, and an elegant pendant lamp. Elevate any room to an enchanting realm where comfort meets style, creating a truly magical ambiance that\'s perfect for relaxation and rejuvenation.',
+        image: 'Homeware-table-lamp.jpg',
+        price: 49.99,
+        quantity: 5
+      },
+      {
+        name: 'The Centre Piece Pack',
+        category: categories[3]._id,
+        description:
+          'Elevate your interior decor with our captivating centerpiece pack, featuring the exquisite Rattan shelf, two charming shell candles, and the boho candle kit. Designed to captivate, this ensemble effortlessly draws eyes and admiration, infusing your space with an air of natural elegance and artistic charm that\'s sure to leave a lasting impression.',
+        image: 'Homeware-table-lamp.jpg',
+        price: 54.99,
+        quantity: 5
+      },
   ]);
 
   console.log('products seeded');
