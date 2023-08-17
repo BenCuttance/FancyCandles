@@ -25,7 +25,8 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
-  orders: [Order.schema]
+  orders: [Order.schema],
+  isAdmin:{ type: Boolean, default: false },
 });
 
 // set up pre-save middleware to create password

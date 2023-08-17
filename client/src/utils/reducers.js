@@ -1,5 +1,6 @@
 import { useReducer } from "react";
 import {
+  DECODE_TOKEN,
   UPDATE_PRODUCTS,
   ADD_TO_CART,
   UPDATE_CART_QUANTITY,
@@ -18,7 +19,13 @@ export const reducer = (state, action) => {
         ...state,
         products: [...action.products],
       };
-
+    case DECODE_TOKEN:{
+      let decoded = action.decoded;
+      console.log("decoding", decoded)
+      return state = {
+        ...state,
+        user:decoded.data
+      };}
     case ADD_TO_CART:
       return {
         ...state,
