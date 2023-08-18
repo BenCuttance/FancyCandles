@@ -29,7 +29,7 @@ export default function Header(props) {
     if (Auth.loggedIn() && getToken()) {
       return (
         <div className="header-top-nav">
-          {state.user && state.user.isAdmin && <Link to="/admin"> Add product </Link>}
+          {state.user && state.user.isAdmin && <Link to="/addproduct"> Add product </Link>} 
           <Link to="/orderHistory">Order History</Link>
           <a href="/" onClick={() => Auth.logout()}>
             Logout
