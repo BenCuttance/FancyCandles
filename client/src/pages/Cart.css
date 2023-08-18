@@ -1,3 +1,8 @@
 .cart-page-heading {
   margin-bottom: 40px;
 }
+
+.cart-page-checkout {
+  text-align: end;
+  margin-top: 40px;
+}

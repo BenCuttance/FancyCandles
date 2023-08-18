@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
+  ADD_MULTIPLE_TO_CART,
   ADD_TO_CART,
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
@@ -15,6 +16,17 @@ const CartTable = () => {
   const [state, dispatch] = useStoreContext();
 
   const { cart } = state;
+
+  useEffect(() => {
+    async function getCart() {
+      const cart = await idbPromise("cart", "get");
+      dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
+    }
+
+    if (!state.cart.length) {
+      getCart();
+    }
+  }, [state.cart.length, dispatch]);
 
   const addToCart = (product) => {
     const itemInCart = cart.find((cartItem) => cartItem._id === product._id);
@@ -101,7 +113,7 @@ const CartTable = () => {
               </Button>
             </div>
             <div className="cart-item-product-price">
-              AUD {product.price * product.purchaseQuantity}
+              USD {product.price * product.purchaseQuantity}
             </div>
             <div className="cart-item-product-remove">
               <Button

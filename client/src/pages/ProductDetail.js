@@ -67,7 +67,7 @@ const ProductDetail = () => {
       <div className="product-detail-content">
         <div className="product-name">{currentProduct.name?.toUpperCase()}</div>
         <p className="product-description">{currentProduct.description}</p>
-        <div className="product-price">AUD {currentProduct.price} </div>
+        <div className="product-price">USD {currentProduct.price} </div>
 
         <Button
           onClick={() => {
