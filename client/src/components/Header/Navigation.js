@@ -25,6 +25,7 @@ export default function Navigation(props) {
       );
     }
   };
+  
 
   return <div className="nav-container">{renderNavContent()}</div>;
 }

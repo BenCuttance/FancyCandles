@@ -11,6 +11,15 @@ export const LOGIN = gql`
   }
 `;
 
+// export const ADD_PRODUCT = gql`
+// mutation addProduct(
+//     $name: String!
+//     $description: String!
+//     $price: !Number
+//     $quantity: !Number
+//     category: !Number
+// )`
+
 export const ADD_ORDER = gql`
   mutation addOrder($products: [ID]!) {
     addOrder(products: $products) {
@@ -49,3 +58,5 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+

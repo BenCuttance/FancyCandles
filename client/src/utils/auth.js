@@ -25,8 +25,6 @@ class AuthService {
 
   getDecodedToken(token){
 
-
-
     console.log('beep boop')
     try {
       const decoded = decode(token);

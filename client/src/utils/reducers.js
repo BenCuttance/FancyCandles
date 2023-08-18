@@ -1,5 +1,7 @@
 import { useReducer } from "react";
 import {
+  REMOVE_PRODUCT,
+  ADD_PRODUCT,
   DECODE_TOKEN,
   UPDATE_PRODUCTS,
   ADD_TO_CART,
@@ -9,7 +11,7 @@ import {
   UPDATE_CATEGORIES,
   UPDATE_CURRENT_CATEGORY,
   CLEAR_CART,
-  TOGGLE_CART
+  TOGGLE_CART,
 } from "./actions";
 
 export const reducer = (state, action) => {
@@ -24,7 +26,7 @@ export const reducer = (state, action) => {
       console.log("decoding", decoded)
       return state = {
         ...state,
-        user:decoded.data
+        user:{ ...decoded.data }
       };}
     case ADD_TO_CART:
       return {
@@ -38,6 +40,20 @@ export const reducer = (state, action) => {
         ...state,
         cart: [...state.cart, ...action.products],
       };
+
+    case ADD_PRODUCT:{
+    return {
+      ...state,
+      products: [...state.products].filter(
+        (products) => products.name !== action.products
+      ) 
+    }
+      }
+
+    case REMOVE_PRODUCT:
+      return {
+
+      }
 
     case UPDATE_CART_QUANTITY:
       return {

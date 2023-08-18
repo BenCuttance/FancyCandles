@@ -14,7 +14,7 @@ const BrowseProductList = (props) => {
         return (
           <div className="product-item">
             <img src={`/images/${product.image}`} />
-            <div className="product-name">{product.name.toUpperCase()}</div>
+            <div className="product-name">{product.name.toUpperCase()}</div> 
             <div className="product-price">AUD {product.price}</div>
             {/* TODO: replace 1 with actual id */}
             <Button variant="plain" onClick={() => navigate(`/products/1`)}>
