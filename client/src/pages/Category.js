@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BrowseProductList from "../components/ProductList/BrowseProductList";
 import "./Category.css";
-import Cart from "../components/Cart";
 import { QUERY_CATEGORIES, QUERY_PRODUCTS } from "../utils/queries";
 import {
   UPDATE_CATEGORIES,
@@ -81,19 +80,13 @@ const Category = () => {
   };
 
   return (
-    <div>
-      <div className="category-page-container">
-        <img
-          className="category-banner"
-          src={`/images/${category?.imageBanner}`}
-        />
-        <h1 className="category-page-heading">{category?.name}</h1>
-        <BrowseProductList
-          products={products}
-          handleClickProduct={handleClick}
-        />
-      </div>
-      <Cart />
+    <div className="category-page-container">
+      <img
+        className="category-banner"
+        src={`/images/${category?.imageBanner}`}
+      />
+      <h1 className="category-page-heading">{category?.name}</h1>
+      <BrowseProductList products={products} handleClickProduct={handleClick} />
     </div>
   );
 };

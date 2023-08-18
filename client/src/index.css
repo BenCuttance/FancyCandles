@@ -75,8 +75,17 @@ header {
   background: var(--primary);
 }
 
-header a {
-  color: var(--light);
+a {
+  color: #121212;
+  text-decoration: none;
+}
+
+a:hover {
+  border-bottom: 1px solid #121212;
+}
+
+a:visited {
+  color: #121212;
 }
 
 img {
