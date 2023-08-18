@@ -24,10 +24,19 @@
 .header-top-nav a {
   margin-left: 20px;
   color: #121212;
+  text-decoration: none;
 }
 
 .header-top-nav a:hover {
-  color: #be9fe7;
+  border-bottom: 1px solid #121212;
+}
+
+.header-cart-bar .header-cart-link {
+  color: white;
+}
+
+.header-cart-bar .header-cart-link:hover {
+  border-bottom: 1px solid white;
 }
 
 .logo-link {

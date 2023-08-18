@@ -1,74 +1,45 @@
-
 import Button from "../components/Button/Button";
-import Cart from "../components/Cart";
 
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-
 
 import { useStoreContext } from "../utils/GlobalState";
 import {
-  REMOVE_FROM_CART,
-  UPDATE_CART_QUANTITY,
   ADD_TO_CART,
-  UPDATE_PRODUCTS,
+  UPDATE_CART_QUANTITY,
+  UPDATE_CURRENT_PRODUCT,
 } from "../utils/actions";
-import { QUERY_PRODUCTS } from "../utils/queries";
+import { QUERY_PRODUCT } from "../utils/queries";
 import { idbPromise } from "../utils/helpers";
 import spinner from "../assets/spinner.gif";
 
 import "./ProductDetail.css";
 
-const product = {
-  name: "Bianco Bergamot Candle",
-  description:
-    "Elevate your senses with the luxurious Bianco Bergamot Candle. Infused with the invigorating essence of bergamot oranges, this exquisite soy candle fills your space with a refreshing and uplifting aroma. The sleek and elegant design complements any decor, making it a perfect addition to your home. Light up the Bianco Bergamot Candle to create an inviting atmosphere that revitalizes your surroundings and leaves a lasting impression.",
-  image: "Candle-bianco-bergamot.png",
-  category: 1,
-  price: 11.99,
-  quantity: 500,
-};
-
 const ProductDetail = () => {
-
   const [state, dispatch] = useStoreContext();
   const { id } = useParams();
+  const [cartMessage, setCartMessage] = useState();
 
-  const [currentProduct, setCurrentProduct] = useState({});
+  const { loading, data: productData } = useQuery(QUERY_PRODUCT, {
+    variables: {
+      id,
+    },
+  });
 
-  const { loading, data } = useQuery(QUERY_PRODUCTS);
-
-  const { products, cart } = state;
+  const { currentProduct, cart } = state;
 
   useEffect(() => {
-    // already in global store
-    if (products.length) {
-      setCurrentProduct(products.find((product) => product._id === id));
-    }
-    // retrieved from server
-    else if (data) {
+    if (productData) {
       dispatch({
-        type: UPDATE_PRODUCTS,
-        products: data.products,
-      });
-
-      data.products.forEach((product) => {
-        idbPromise("products", "put", product);
+        type: UPDATE_CURRENT_PRODUCT,
+        currentProduct: productData.product,
       });
     }
-    // get cache from idb
-    else if (!loading) {
-      idbPromise("products", "get").then((indexedProducts) => {
-        dispatch({
-          type: UPDATE_PRODUCTS,
-          products: indexedProducts,
-        });
-      });
-    }
-  }, [products, data, loading, dispatch, id]);
+  }, [productData, loading, dispatch]);
 
   const addToCart = () => {
+    setCartMessage("");
     const itemInCart = cart.find((cartItem) => cartItem._id === id);
     if (itemInCart) {
       dispatch({
@@ -87,36 +58,32 @@ const ProductDetail = () => {
       });
       idbPromise("cart", "put", { ...currentProduct, purchaseQuantity: 1 });
     }
+    setCartMessage("Your item has been added to cart.");
   };
-
-
-  const removeFromCart = () => {
-    dispatch({
-      type: REMOVE_FROM_CART,
-      _id: currentProduct._id,
-    });
-
-    idbPromise('cart', 'delete', { ...currentProduct });
-  };
-
 
   return (
     <div className="product-detail-page">
-      <img src={`/images/${product.image}`} />
+      <img src={`/images/${currentProduct.image}`} />
       <div className="product-detail-content">
-        <div className="product-name">{product.name.toUpperCase()}</div>
-        <p className="product-description">{product.description}</p>
-        <div className="product-price">AUD {product.price}{' '}</div>
+        <div className="product-name">{currentProduct.name?.toUpperCase()}</div>
+        <p className="product-description">{currentProduct.description}</p>
+        <div className="product-price">USD {currentProduct.price} </div>
 
-        <Button onClick={addToCart} variant="ghost" style={{ width: "100%" }}>
+        <Button
+          onClick={() => {
+            addToCart();
+          }}
+          variant="ghost"
+          style={{ width: "100%" }}
+        >
           ADD TO CART
         </Button>
+        {cartMessage && (
+          <div className="product-detail-cart-message">{cartMessage}</div>
+        )}
       </div>
-      <Cart />
     </div>
   );
 };
 
 export default ProductDetail;
-
-

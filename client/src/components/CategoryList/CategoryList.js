@@ -1,17 +1,51 @@
-import React from "react";
+import { useQuery } from "@apollo/client";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  UPDATE_CATEGORIES,
+  UPDATE_CURRENT_CATEGORY,
+} from "../../utils/actions";
+import { useStoreContext } from "../../utils/GlobalState";
+import { idbPromise } from "../../utils/helpers";
+import { QUERY_CATEGORIES } from "../../utils/queries";
 import "./CategoryList.css";
-
-const categories = [
-  { id: 1, name: "Candles", image: "Candle-bedroom.jpg" },
-  { id: 2, name: "Diffusers", image: "Candle-bedroom.jpg" },
-  { id: 3, name: "Oils", image: "Candle-bedroom.jpg" },
-  { id: 4, name: "Gifts", image: "Candle-bedroom.jpg" },
-  { id: 5, name: "Homewares", image: "Candle-bedroom.jpg" },
-];
 
 const CategoryList = () => {
   const navigate = useNavigate();
+
+  const [state, dispatch] = useStoreContext();
+
+  const { categories } = state;
+
+  const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
+
+  useEffect(() => {
+    if (categoryData) {
+      dispatch({
+        type: UPDATE_CATEGORIES,
+        categories: categoryData.categories,
+      });
+      categoryData.categories.forEach((category) => {
+        idbPromise("categories", "put", category);
+      });
+    } else if (!loading) {
+      idbPromise("categories", "get").then((categories) => {
+        dispatch({
+          type: UPDATE_CATEGORIES,
+          categories: categories,
+        });
+      });
+    }
+  }, [categoryData, loading, dispatch]);
+
+  const handleClick = (id) => {
+    navigate(`/category/${id}`);
+    dispatch({
+      type: UPDATE_CURRENT_CATEGORY,
+      currentCategory: id,
+    });
+  };
+
   return (
     <div className="category-list-section-container">
       <h2 className="category-list-heading">Browse categories</h2>
@@ -19,9 +53,9 @@ const CategoryList = () => {
         {categories.map((category) => {
           return (
             <div
-              key={category.name}
+              key={category._id}
               className="category"
-              onClick={() => navigate(`/category/${category.id}`)}
+              onClick={() => handleClick(category._id)}
             >
               <img src={`/images/${category.image}`} />
               <div className="category-name">{category.name}</div>

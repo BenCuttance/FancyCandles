@@ -22,6 +22,7 @@ import Category from "./pages/Category";
 
 import "./App.css";
 import ProductDetail from "./pages/ProductDetail";
+import Cart from "./pages/Cart";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -58,6 +59,7 @@ function App() {
                 <Route path="/category/:id" element={<Category />} />
                 <Route path="/orderHistory" element={<OrderHistory />} />
                 <Route path="/products/:id" element={<ProductDetail />} />
+                <Route path="/cart" element={<Cart />} />
                 <Route path="*" element={<NoMatch />} />
               </Routes>
             </div>
