@@ -6,7 +6,8 @@ import { useStoreContext } from "../../utils/GlobalState";
 import { DECODE_TOKEN } from "../../utils/actions";
 
 export default function Header(props) {
-  let [state, dispatch] = useStoreContext();
+  const [state, dispatch] = useStoreContext();
+
   useEffect(() => {
     console.log("state", state);
   }, [state]);
@@ -15,23 +16,20 @@ export default function Header(props) {
     const token = localStorage.getItem("id_token");
     let decoded = Auth.getDecodedToken(token);
 
-    if (!state.user) {
-      dispatch({
-        type: DECODE_TOKEN,
-        decoded,
-      });
-    }
-
-    return true;
-  };
+  if (!state.user) {
+    dispatch({
+      type: DECODE_TOKEN,
+      decoded,
+    });
+  }
+  return true;
+};
 
   const renderTopNav = () => {
     if (Auth.loggedIn() && getToken()) {
       return (
         <div className="header-top-nav">
-          {state.user && state.user.isAdmin && (
-            <Link to="/admin"> Admin View </Link>
-          )}
+          {state.user && state.user.isAdmin && <Link to="/admin"> Add product </Link>}
           <Link to="/orderHistory">Order History</Link>
           <a href="/" onClick={() => Auth.logout()}>
             Logout
@@ -63,7 +61,7 @@ export default function Header(props) {
           <Link to="/" className="logo-link">
             <div className="header-logo">Fancy Candles</div>
           </Link>
-
+          {state.user && state.user.isAdmin && <Link to="/admin"> Admin View </Link>}
           {renderTopNav()}
         </div>
       </div>
