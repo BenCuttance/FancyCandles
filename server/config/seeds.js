@@ -5,11 +5,31 @@ db.once("open", async () => {
   await Category.deleteMany();
 
   const categories = await Category.insertMany([
-    { name: "Candles" },
-    { name: "Diffusers" },
-    { name: "Oils" },
-    { name: "Gifts" },
-    { name: "Homewares" },
+    {
+      name: "Candles",
+      image: "Candle-bedroom.jpg",
+      imageBanner: "home-banner.png",
+    },
+    {
+      name: "Diffusers",
+      image: "Candle-bedroom.jpg",
+      imageBanner: "home-banner.png",
+    },
+    {
+      name: "Oils",
+      image: "Candle-bedroom.jpg",
+      imageBanner: "home-banner.png",
+    },
+    {
+      name: "Gifts",
+      image: "Candle-bedroom.jpg",
+      imageBanner: "home-banner.png",
+    },
+    {
+      name: "Homewares",
+      image: "Candle-bedroom.jpg",
+      imageBanner: "home-banner.png",
+    },
   ]);
 
   console.log("categories seeded");
@@ -392,64 +412,64 @@ db.once("open", async () => {
         "Illuminate your surroundings with our elegant Table Lamp, a perfect fusion of style and functionality. Designed to complement your decor, this lamp adds a soft and inviting glow to any space. Whether placed on a bedside table, desk, or sideboard, the Table Lamp provides focused lighting for tasks and creates a cozy ambiance. Choose from various designs and materials to match your aesthetic, and let the Table Lamp be a stylish addition that enhances both your decor and the comfort of your environment.",
       image: "Homeware-table-lamp.jpg",
       price: 27.99,
-      quantity: 10
+      quantity: 10,
     },
-       //_____________ SEED GIFTS __________________
-       {
-        name: 'Boho Pack',
-        category: categories[3]._id,
-        description:
-          'Elevate your ambiance with our boho candle pack, which includes two exquisitely designed candles and a pair of intricately detailed candle holders, all inspired by the bohemian aesthetic.',
+    //_____________ SEED GIFTS __________________
+    {
+      name: "Boho Pack",
+      category: categories[3]._id,
+      description:
+        "Elevate your ambiance with our boho candle pack, which includes two exquisitely designed candles and a pair of intricately detailed candle holders, all inspired by the bohemian aesthetic.",
 
-        image: 'BohoPack.jpg',
-        price: 39.99,
-        quantity: 10
-      },
-      {
-        name: 'Diffuser Gift Pack',
-        category: categories[3]._id,
-        description:
-          'Immerse yourself in the ultimate aromatic experience with our luxurious diffuser gift pack. This exquisite set features our elegant wood light diffuser accompanied by a curated selection of five distinct oils, including refreshing peppermint, warming cinnamon, soothing lavender, and the uplifting scents of orange and bergamot. With this collection, you\'ll have a myriad of wonderful options to explore and create your perfect ambience',
-        image: 'diffuserPack.webp',
-        price: 44.99,
-        quantity: 10
-      },
-      {
-        name: 'Gift Pack for Her',
-        category: categories[3]._id,
-        description:
-          'Indulge her senses in pure delight with a thoughtful gift set that includes two enchanting bedroom candles, a mesmerizing crystal diffuser, and a trio of special oils. Elevate the mood with the captivating aromas of tea tree, patchouli, and cinnamon, creating an ambiance that\'s as unique as it is enchanting.',
-        image: 'forHer.jpg',
-        price: 49.99,
-        quantity: 10
-      },
-      {
-        name: 'Gift Pack for Him',
-        category: categories[3]._id,
-        description:
-          'Unveil a world of sophistication with our distinguished gift pack designed for him. Featuring the rich allure of the Verone leather candle and complemented by a sleek flame diffuser, this set comes complete with three invigorating oils: bergamot, lime, and grapefruit. Elevate his surroundings with a blend of refined scents that mirror his distinctive style and taste',
-        image: 'forHim.jpg',
-        price: 49.99,
-        quantity: 10
-      },
-      {
-        name: 'Homewares Collection Pack',
-        category: categories[3]._id,
-        description:
-          'Transform your living space into a haven of comfort and charm with our homeware collection pack. Enveloping you in coziness, this set includes two plush cushions, a stylish couch cover, and an elegant pendant lamp. Elevate any room to an enchanting realm where comfort meets style, creating a truly magical ambiance that\'s perfect for relaxation and rejuvenation.',
-        image: 'homeWarePack.webp',
-        price: 49.99,
-        quantity: 5
-      },
-      {
-        name: 'The Centre Piece Pack',
-        category: categories[3]._id,
-        description:
-          'Elevate your interior decor with our captivating centerpiece pack, featuring the exquisite Rattan shelf, two charming shell candles, and the boho candle kit. Designed to captivate, this ensemble effortlessly draws eyes and admiration, infusing your space with an air of natural elegance and artistic charm that\'s sure to leave a lasting impression.',
-        image: 'candlesTable.jpg',
-        price: 54.99,
-        quantity: 5
-      },
+      image: "BohoPack.jpg",
+      price: 39.99,
+      quantity: 10,
+    },
+    {
+      name: "Diffuser Gift Pack",
+      category: categories[3]._id,
+      description:
+        "Immerse yourself in the ultimate aromatic experience with our luxurious diffuser gift pack. This exquisite set features our elegant wood light diffuser accompanied by a curated selection of five distinct oils, including refreshing peppermint, warming cinnamon, soothing lavender, and the uplifting scents of orange and bergamot. With this collection, you'll have a myriad of wonderful options to explore and create your perfect ambience",
+      image: "diffuserPack.webp",
+      price: 44.99,
+      quantity: 10,
+    },
+    {
+      name: "Gift Pack for Her",
+      category: categories[3]._id,
+      description:
+        "Indulge her senses in pure delight with a thoughtful gift set that includes two enchanting bedroom candles, a mesmerizing crystal diffuser, and a trio of special oils. Elevate the mood with the captivating aromas of tea tree, patchouli, and cinnamon, creating an ambiance that's as unique as it is enchanting.",
+      image: "forHer.jpg",
+      price: 49.99,
+      quantity: 10,
+    },
+    {
+      name: "Gift Pack for Him",
+      category: categories[3]._id,
+      description:
+        "Unveil a world of sophistication with our distinguished gift pack designed for him. Featuring the rich allure of the Verone leather candle and complemented by a sleek flame diffuser, this set comes complete with three invigorating oils: bergamot, lime, and grapefruit. Elevate his surroundings with a blend of refined scents that mirror his distinctive style and taste",
+      image: "forHim.jpg",
+      price: 49.99,
+      quantity: 10,
+    },
+    {
+      name: "Homewares Collection Pack",
+      category: categories[3]._id,
+      description:
+        "Transform your living space into a haven of comfort and charm with our homeware collection pack. Enveloping you in coziness, this set includes two plush cushions, a stylish couch cover, and an elegant pendant lamp. Elevate any room to an enchanting realm where comfort meets style, creating a truly magical ambiance that's perfect for relaxation and rejuvenation.",
+      image: "homeWarePack.webp",
+      price: 49.99,
+      quantity: 5,
+    },
+    {
+      name: "The Centre Piece Pack",
+      category: categories[3]._id,
+      description:
+        "Elevate your interior decor with our captivating centerpiece pack, featuring the exquisite Rattan shelf, two charming shell candles, and the boho candle kit. Designed to captivate, this ensemble effortlessly draws eyes and admiration, infusing your space with an air of natural elegance and artistic charm that's sure to leave a lasting impression.",
+      image: "candlesTable.jpg",
+      price: 54.99,
+      quantity: 5,
+    },
   ]);
 
   console.log("products seeded");
@@ -457,10 +477,10 @@ db.once("open", async () => {
   await User.deleteMany();
 
   await User.create({
-    firstName: 'Pamela',
-    lastName: 'Washington',
-    email: 'pamela@testmail.com',
-    password: 'password12345',
+    firstName: "Pamela",
+    lastName: "Washington",
+    email: "pamela@testmail.com",
+    password: "password12345",
     isAdmin: true,
 
     orders: [
