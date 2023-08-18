@@ -19,6 +19,7 @@ import OrderHistory from "./pages/OrderHistory";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Category from "./pages/Category";
+import AddProduct from "./pages/AddProduct";
 
 import "./App.css";
 import ProductDetail from "./pages/ProductDetail";
@@ -59,6 +60,7 @@ function App() {
                 <Route path="/category/:id" element={<Category />} />
                 <Route path="/orderHistory" element={<OrderHistory />} />
                 <Route path="/products/:id" element={<ProductDetail />} />
+                <Route path="/addproduct" element={<AddProduct />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="*" element={<NoMatch />} />
               </Routes>
