@@ -61,7 +61,7 @@ const resolvers = {
       for (const product of args.products) {
         line_items.push({
           price_data: {
-            currency: "usd",
+            currency: "aud",
             product_data: {
               name: product.name,
               description: product.description,
@@ -114,55 +114,27 @@ const resolvers = {
         return await product.populate("category");
     },
 
-    deleteProduct: async (parent, { productId }, context) => {
-      try {
-        const productToDelete = await Product.findById(productId);
-    
-        if (!productToDelete) {
-          throw new Error("Product not found");
-        }
-    
-        await productToDelete.remove();
-    
-        return "Product deleted successfully";
-      } catch (error) {
-        throw new Error(`Error deleting product: ${error.message}`);
-      }
+    deleteProduct: async (parent, { productId }) => {
+      return Product.findOneAndDelete({ _id: productId });
     },
 
     editProduct: async (parent, { productId, updatedProduct }, context) => {
       try {
-
-        const productToUpdate = await Product.findById(productId);
+        const updatedProductDoc = await Product.findOneAndUpdate(
+          { _id: productId },
+          { $set: updatedProduct },
+          { new: true }
+        );
     
-        if (!productToUpdate) {
+        if (!updatedProductDoc) {
           throw new Error("Product not found");
         }
     
-        if (updatedProduct.name) {
-          productToUpdate.name = updatedProduct.name;
-        }
-        if (updatedProduct.description) {
-          productToUpdate.description = updatedProduct.description;
-        }
-        if (updatedProduct.price) {
-          productToUpdate.price = updatedProduct.price;
-        }
-        if (updatedProduct.quantity) {
-          productToUpdate.quantity = updatedProduct.quantity;
-        }
-        if (updatedProduct.category) {
-          productToUpdate.category = updatedProduct.category;
-        }
-    
-        await productToUpdate.save();
-    
-        return productToUpdate;
+        return updatedProductDoc;
       } catch (error) {
         throw new Error(`Error editing product: ${error.message}`);
       }
     },
-    
     
 //_________________________________________________________
 
