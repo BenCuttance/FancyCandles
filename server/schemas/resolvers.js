@@ -105,6 +105,69 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
+//_____________ Products_________________________________
+    addProduct: async (parent, products , context) => {
+       console.log(products);
+ 
+        const product = await Product.create( products );
+
+        return await product.populate("category");
+    },
+
+    deleteProduct: async (parent, { productId }, context) => {
+      try {
+        const productToDelete = await Product.findById(productId);
+    
+        if (!productToDelete) {
+          throw new Error("Product not found");
+        }
+    
+        await productToDelete.remove();
+    
+        return "Product deleted successfully";
+      } catch (error) {
+        throw new Error(`Error deleting product: ${error.message}`);
+      }
+    },
+
+    editProduct: async (parent, { productId, updatedProduct }, context) => {
+      try {
+
+        const productToUpdate = await Product.findById(productId);
+    
+        if (!productToUpdate) {
+          throw new Error("Product not found");
+        }
+    
+        if (updatedProduct.name) {
+          productToUpdate.name = updatedProduct.name;
+        }
+        if (updatedProduct.description) {
+          productToUpdate.description = updatedProduct.description;
+        }
+        if (updatedProduct.price) {
+          productToUpdate.price = updatedProduct.price;
+        }
+        if (updatedProduct.quantity) {
+          productToUpdate.quantity = updatedProduct.quantity;
+        }
+        if (updatedProduct.category) {
+          productToUpdate.category = updatedProduct.category;
+        }
+    
+        await productToUpdate.save();
+    
+        return productToUpdate;
+      } catch (error) {
+        throw new Error(`Error editing product: ${error.message}`);
+      }
+    },
+    
+    
+//_________________________________________________________
+
+
+
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, {
@@ -141,6 +204,10 @@ const resolvers = {
       return { token, user };
     },
   },
+
+
+
+
 };
 
 module.exports = resolvers;
