@@ -61,7 +61,7 @@ const resolvers = {
       for (const product of args.products) {
         line_items.push({
           price_data: {
-            currency: "usd",
+            currency: "aud",
             product_data: {
               name: product.name,
               description: product.description,
@@ -105,6 +105,41 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
+//_____________ Products_________________________________
+    addProduct: async (parent, products , context) => {
+       console.log(products);
+ 
+        const product = await Product.create( products );
+
+        return await product.populate("category");
+    },
+
+    deleteProduct: async (parent, { productId }) => {
+      return Product.findOneAndDelete({ _id: productId });
+    },
+
+    editProduct: async (parent, { productId, updatedProduct }, context) => {
+      try {
+        const updatedProductDoc = await Product.findOneAndUpdate(
+          { _id: productId },
+          { $set: updatedProduct },
+          { new: true }
+        );
+    
+        if (!updatedProductDoc) {
+          throw new Error("Product not found");
+        }
+    
+        return updatedProductDoc;
+      } catch (error) {
+        throw new Error(`Error editing product: ${error.message}`);
+      }
+    },
+    
+//_________________________________________________________
+
+
+
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, {
@@ -141,6 +176,10 @@ const resolvers = {
       return { token, user };
     },
   },
+
+
+
+
 };
 
 module.exports = resolvers;

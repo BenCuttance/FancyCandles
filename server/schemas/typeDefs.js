@@ -74,6 +74,9 @@ const typeDefs = gql`
       email: String
       password: String
     ): User
+    addProduct(name: String!, description: String, image: String, price: Float!, quantity: Int!, category: ID!): Product
+    deleteProduct(productId: ID!): String
+    editProduct(productId: ID!, updatedProduct: ProductInput!): Product
     updateProduct(_id: ID!, quantity: Int!): Product
     login(email: String!, password: String!): Auth
   }

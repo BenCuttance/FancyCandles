@@ -101,9 +101,9 @@ const ProductDetail = () => {
         >
           ADD TO CART
         </Button>
-        {state.user && state.user.isAdmin && <Button varient="plain"> Delete Item </Button>}
+        {state.user && state.user.isAdmin && <Button variant="ghost"> Delete Item </Button>}
         <br></br>
-        {state.user && state.user.isAdmin && <Button varient="plain"> Edit Item </Button>}
+        {state.user && state.user.isAdmin && <Button variant="ghost"> Edit Item </Button>}
         <p>{cartMessage}</p>
       </div>
     </div>

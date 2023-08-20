@@ -49,3 +49,41 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_PRODUCT = gql`
+mutation AddProduct($name: String!, $price: Float!, $quantity: Int!, $category: ID!, $description: String) {
+  addProduct(name: $name, price: $price, quantity: $quantity, category: $category, description: $description) {
+    _id
+    name
+    description
+    image
+    quantity
+    price
+    category {
+      name
+    }
+  }
+}
+`;
+
+export const EDIT_PRODUCT = gql`
+mutation EditProduct($productId: ID!, $updatedProduct: ProductInput!) {
+  editProduct(productId: $productId, updatedProduct: $updatedProduct) {
+    _id
+    name
+    description
+    image
+    quantity
+    price
+    category {
+      name
+    }
+  }
+}
+`;
+
+export const DELETE_PRODUCT = gql`
+mutation DeleteProduct($productId: ID!) {
+  deleteProduct(productId: $productId)
+}
+`;

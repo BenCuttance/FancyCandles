@@ -113,7 +113,7 @@ const CartTable = () => {
               </Button>
             </div>
             <div className="cart-item-product-price">
-              USD {product.price * product.purchaseQuantity}
+              AUD {product.price * product.purchaseQuantity}
             </div>
             <div className="cart-item-product-remove">
               <Button

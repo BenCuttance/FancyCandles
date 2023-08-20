@@ -13,7 +13,7 @@ const BrowseProductList = (props) => {
           <div className="product-item">
             <img src={`/images/${product.image}`} />
             <div className="product-name">{product.name.toUpperCase()}</div>
-            <div className="product-price">USD {product.price}</div>
+            <div className="product-price">AUD {product.price}</div>
             <Button
               variant="plain"
               onClick={() => {
