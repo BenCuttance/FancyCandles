@@ -8,6 +8,11 @@
     flex-direction: column;
     padding: 0;
   }
+
+  @media(max-width: 1000px) {
+    flex-direction: column;
+    padding: 0 40px;
+  }
 }
 
 .product-detail-content {
@@ -23,8 +28,13 @@
   object-fit: cover;
   margin-right: 40px;
 
+  @media(max-width: 1000px) {
+    height: 400px;
+    margin-bottom: 40px;
+  }
+
   @media(max-width: 550px) {
-    margin: 0;
+    margin-right: 0;
     height: 350px;
   }
 }
