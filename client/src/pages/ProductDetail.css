@@ -3,16 +3,40 @@
   justify-content: space-around;
   align-items: center;
   padding: 0 60px;
+
+  @media(max-width: 550px) {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  @media(max-width: 1000px) {
+    flex-direction: column;
+    padding: 0 40px;
+  }
 }
 
 .product-detail-content {
   max-width: 500px;
+
+  @media(max-width: 550px) {
+    max-width: unset;
+  }
 }
 
 .product-detail-page img {
   height: 600px;
   object-fit: cover;
   margin-right: 40px;
+
+  @media(max-width: 1000px) {
+    height: 400px;
+    margin-bottom: 40px;
+  }
+
+  @media(max-width: 550px) {
+    margin-right: 0;
+    height: 350px;
+  }
 }
 
 .product-detail-page .product-name {

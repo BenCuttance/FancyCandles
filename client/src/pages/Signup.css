@@ -1,0 +1,27 @@
+.signup-heading {
+  margin-bottom: 50px;
+}
+
+.signup-form {
+  max-width: 500px;
+  width: 100%;
+}
+
+.signup-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.signup-form-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.signup-form-button {
+  margin: 40px 0 20px 0;
+}
+
+.signup-form-button button {
+  width: 100%;
+}

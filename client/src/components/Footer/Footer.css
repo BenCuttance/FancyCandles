@@ -4,11 +4,19 @@
   padding: 80px 80px 80px 80px;
   background: #121212;
   color: white;
+
+  @media(max-width: 550px) {
+    padding: 40px 20px;
+  }
 }
 
 .footer-container .top {
   display: flex;
   padding-bottom: 40px;
+
+  @media(max-width: 550px) {
+    flex-direction: column;
+  }
 }
 
 .footer-container .bottom {
@@ -44,4 +52,5 @@
 
 .footer-section {
   margin-right: 80px;
+  margin-bottom: 40px;
 }

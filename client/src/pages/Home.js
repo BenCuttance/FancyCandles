@@ -4,10 +4,10 @@ import CategoryList from "../components/CategoryList/CategoryList";
 
 const Home = () => {
   return (
-    <div className="page-container">
+    <>
       <Banner />
       <CategoryList />
-    </div>
+    </>
   );
 };
 

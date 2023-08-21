@@ -17,6 +17,8 @@
 
 html,
 body {
+  width: 100vw;
+  font-family: "Open Sans";
   min-height: 100%;
 }
 
@@ -78,6 +80,7 @@ header {
 a {
   color: #121212;
   text-decoration: none;
+  border-bottom: 1px solid transparent;
 }
 
 a:hover {
@@ -101,17 +104,16 @@ form {
 }
 
 input {
-  font-size: 1rem;
-  padding: 0.25rem;
-  border: 1px solid var(--dark);
+  font-size: 16px;
+  border: 1px solid rgba(0,0,0,0.3);
   outline: none;
-  border-radius: 3px;
-  transition: box-shadow 0.2s;
+  padding: 10px;
+  transition: all 0.2s;
+  width: 100%;
 }
 
-input:focus {
-  border: 1px solid var(--secondary);
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, .5);
+input:focus, input:hover {
+  border-bottom: 2px solid #121212;
 }
 
 .page-container {
@@ -180,6 +182,7 @@ input:focus {
 
 .error-text {
   color: var(--error);
+  font-size: 16px;
 }
 
 @media screen and (max-width: 768px) {

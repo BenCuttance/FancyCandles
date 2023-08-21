@@ -9,6 +9,11 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   column-gap: 20px;
+
+  @media(max-width: 550px) {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+  }
 }
 
 .category-list-heading {
