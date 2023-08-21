@@ -1,10 +1,12 @@
 .header-container {
+  width: 100vw;
   box-shadow: 0 0 6px 0 rgba(0,0,0,0.6);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background: white;
+  z-index: 99;
 }
 
 .header-cart-bar {
@@ -16,6 +18,17 @@
   align-items: center;
   justify-content: space-between;
   font-weight: 600;
+
+  @media(max-width: 550px) {
+    padding: 0 20px;
+    justify-content: end;
+  }
+}
+
+.header-promotion {
+  @media(max-width: 550px) {
+    display: none;
+  }
 }
 
 .header-main .top {
@@ -24,6 +37,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media(max-width: 550px) {
+    height: 80px;
+    padding: 20px;
+  }
 }
 
 .header-top-nav a {
@@ -32,6 +50,10 @@
   text-decoration: none;
   font-weight: 600;
   font-size: 18px;
+
+  @media(max-width: 550px) {
+    font-size: 16px;
+  }
 }
 
 .header-top-nav a:hover {
@@ -39,16 +61,26 @@
 }
 
 .header-main .bottom {
-  padding: 0 80px 20px 80px;
+  padding: 0 80px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+
+  @media(max-width: 550px) {
+    padding: 0 20px;
+  }
 }
 
 .header-main .bottom a {
   display: block;
   margin-right: 30px;
+  margin-bottom: 20px;
   font-weight: 600;
   font-size: 18px;
+
+  @media(max-width: 550px) {
+    font-size: 16px;
+  }
 }
 
 .header-cart-bar .header-cart-link {

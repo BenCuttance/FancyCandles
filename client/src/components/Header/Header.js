@@ -90,7 +90,9 @@ export default function Header(props) {
   return (
     <div className="header-container">
       <div className="header-cart-bar">
-        <div>Free standard delivery on orders over $79</div>
+        <div className="header-promotion">
+          Free standard delivery on orders over $79
+        </div>
         <div>
           <Link to="/cart" className="header-cart-link">
             My Cart
