@@ -17,7 +17,15 @@ button[disabled] {
 }
 
 .primary {
-  background-color: #c4a795;
+  border: 2px solid #121212;
+  color: #fff;
+  background: #121212;
+}
+
+.primary:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-color: white;
 }
 
 .ghost {

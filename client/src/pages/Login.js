@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
-import { LOGIN } from '../utils/mutations';
-import Auth from '../utils/auth';
-import { useStoreContext } from '../utils/GlobalState'
-import { DECODE_TOKEN } from '../utils/actions';
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { Link } from "react-router-dom";
+import { LOGIN } from "../utils/mutations";
+import Auth from "../utils/auth";
+import { useStoreContext } from "../utils/GlobalState";
+import { DECODE_TOKEN } from "../utils/actions";
+
+import "./Login.css";
+import Button from "../components/Button/Button";
 
 function Login(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error }] = useMutation(LOGIN);
   let [state, dispatch] = useStoreContext();
   const handleFormSubmit = async (event) => {
@@ -22,7 +25,7 @@ function Login(props) {
       Auth.login(token);
 
       //if succesful navigates to next page
-      
+
       // dispatch({
       //   type: DECODE_TOKEN,
       //   decoded
@@ -41,13 +44,11 @@ function Login(props) {
   };
 
   return (
-    <div className="container my-1">
-      <Link to="/signup">← Go to Signup</Link>
-
-      <h2>Login</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email address:</label>
+    <div>
+      <h1 className="login-heading">Login</h1>
+      <form onSubmit={handleFormSubmit} className="login-form">
+        <div className="login-form-field">
+          <label htmlFor="email">Email address</label>
           <input
             placeholder="youremail@test.com"
             name="email"
@@ -56,8 +57,8 @@ function Login(props) {
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
+        <div className="login-form-field">
+          <label htmlFor="pwd">Password</label>
           <input
             placeholder="******"
             name="password"
@@ -68,12 +69,16 @@ function Login(props) {
         </div>
         {error ? (
           <div>
-            <p className="error-text">The provided credentials are incorrect</p>
+            <p className="error-text">
+              The provided credentials are incorrect.
+            </p>
           </div>
         ) : null}
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
+        <div className="login-form-button">
+          <Button type="submit">Submit</Button>
         </div>
+
+        <Link to="/signup">← Don't have an account? Signup here.</Link>
       </form>
     </div>
   );
