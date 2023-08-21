@@ -13,9 +13,6 @@ import { useQuery } from "@apollo/client";
 import { idbPromise } from "../../utils/helpers";
 
 export default function Header(props) {
-<<<<<<< HEAD
-  let [state, dispatch] = useStoreContext();
-=======
   const [state, dispatch] = useStoreContext();
 
   const navigate = useNavigate();
@@ -24,7 +21,6 @@ export default function Header(props) {
 
   const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 
->>>>>>> bb2ccf90f1d69d727b38aef03995f306082fca9a
   useEffect(() => {
     console.log("state", state);
   }, [state]);
@@ -39,11 +35,6 @@ export default function Header(props) {
         decoded,
       });
     }
-<<<<<<< HEAD
-
-    return true;
-  };
-=======
     return true;
   };
 
@@ -72,18 +63,13 @@ export default function Header(props) {
       currentCategory: id,
     });
   };
->>>>>>> bb2ccf90f1d69d727b38aef03995f306082fca9a
 
   const renderTopNav = () => {
     if (Auth.loggedIn() && getToken()) {
       return (
         <div className="header-top-nav">
           {state.user && state.user.isAdmin && (
-<<<<<<< HEAD
-            <Link to="/admin"> Admin View </Link>
-=======
             <Link to="/addproduct"> Add product </Link>
->>>>>>> bb2ccf90f1d69d727b38aef03995f306082fca9a
           )}
           <Link to="/orderHistory">Order History</Link>
           <a href="/" onClick={() => Auth.logout()}>
@@ -118,13 +104,9 @@ export default function Header(props) {
           <Link to="/" className="logo-link">
             <div className="header-logo">Fancy Candles</div>
           </Link>
-<<<<<<< HEAD
-
-=======
           {state.user && state.user.isAdmin && (
             <Link to="/admin"> Admin View </Link>
           )}
->>>>>>> bb2ccf90f1d69d727b38aef03995f306082fca9a
           {renderTopNav()}
         </div>
         <div className="bottom">
