@@ -1,0 +1,27 @@
+.login-heading {
+  margin-bottom: 50px;
+}
+
+.login-form {
+  max-width: 500px;
+  width: 100%;
+}
+
+.login-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.login-form-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.login-form-button {
+  margin: 40px 0 20px 0;
+}
+
+.login-form-button button {
+  width: 100%;
+}

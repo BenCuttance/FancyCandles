@@ -48,7 +48,9 @@ const CategoryList = () => {
 
   return (
     <div className="category-list-section-container">
-      <h2 className="category-list-heading">Browse categories</h2>
+      <h2 className="category-list-heading" id="browse-categories">
+        Browse categories
+      </h2>
       <div className="category-list-container">
         {categories.map((category) => {
           return (

@@ -18,6 +18,11 @@
   width: 40%;
   min-width: 450px;
   padding: 80px 40px;
+
+  @media(max-width: 550px) {
+    min-width: unset;
+    width: 100%;
+  }
 }
 
 .banner-heading {

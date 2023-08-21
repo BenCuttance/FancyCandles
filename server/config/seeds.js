@@ -7,28 +7,28 @@ db.once("open", async () => {
   const categories = await Category.insertMany([
     {
       name: "Candles",
-      image: "Candle-bedroom.jpg",
-      imageBanner: "home-banner.png",
+      image: "category-candle.png",
+      imageBanner: "category-candles-banner.png",
     },
     {
       name: "Diffusers",
-      image: "Candle-bedroom.jpg",
-      imageBanner: "home-banner.png",
+      image: "category-diffusers.png",
+      imageBanner: "category-diffusers-banner.jpeg",
     },
     {
       name: "Oils",
-      image: "Candle-bedroom.jpg",
-      imageBanner: "home-banner.png",
+      image: "category-oils.png",
+      imageBanner: "category-oil-banner.png",
     },
     {
       name: "Gifts",
-      image: "Candle-bedroom.jpg",
-      imageBanner: "home-banner.png",
+      image: "category-gifts.png",
+      imageBanner: "category-gift-banner.png",
     },
     {
       name: "Homewares",
-      image: "Candle-bedroom.jpg",
-      imageBanner: "home-banner.png",
+      image: "category-homewares.png",
+      imageBanner: "category-homeware-banner.png",
     },
   ]);
 

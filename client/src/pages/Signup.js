@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import Auth from '../utils/auth';
-import { ADD_USER } from '../utils/mutations';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import Auth from "../utils/auth";
+import { ADD_USER } from "../utils/mutations";
+import Button from "../components/Button/Button";
+
+import "./Signup.css";
 
 function Signup(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ email: "", password: "" });
   const [addUser] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {
@@ -31,13 +34,11 @@ function Signup(props) {
   };
 
   return (
-    <div className="container my-1">
-      <Link to="/login">← Go to Login</Link>
-
-      <h2>Signup</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="firstName">First Name:</label>
+    <div>
+      <h1 className="signup-heading">Create an account</h1>
+      <form onSubmit={handleFormSubmit} className="signup-form">
+        <div className="signup-form-field">
+          <label htmlFor="firstName">First Name</label>
           <input
             placeholder="First"
             name="firstName"
@@ -46,8 +47,8 @@ function Signup(props) {
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="lastName">Last Name:</label>
+        <div className="signup-form-field">
+          <label htmlFor="lastName">Last Name</label>
           <input
             placeholder="Last"
             name="lastName"
@@ -56,8 +57,8 @@ function Signup(props) {
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email:</label>
+        <div className="signup-form-field">
+          <label htmlFor="email">Email</label>
           <input
             placeholder="youremail@test.com"
             name="email"
@@ -66,8 +67,8 @@ function Signup(props) {
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
+        <div className="signup-form-field">
+          <label htmlFor="pwd">Password</label>
           <input
             placeholder="******"
             name="password"
@@ -76,9 +77,13 @@ function Signup(props) {
             onChange={handleChange}
           />
         </div>
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
+        <div className="signup-form-button">
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
         </div>
+
+        <Link to="/login">← Go to Login</Link>
       </form>
     </div>
   );
