@@ -94,7 +94,7 @@ setProductDetails({name: currentProduct.name, description: currentProduct.descri
 
 const inputHandler = (e) => {
   console.log(e.target.name, e.target.value)
-  let updatedProduct = {...productDetails, [e.target.name]:isNaN(e.target.value) || e.target.name != "price" ?e.target.value : parseFloat(e.target.value)}
+  let updatedProduct = {...productDetails, [e.target.name]:isNaN(e.target.value) || e.target.name != "price" ? e.target.value : parseFloat(e.target.value)}
   console.log(updatedProduct);
   setProductDetails(updatedProduct);
 }
@@ -154,9 +154,9 @@ const inputHandler = (e) => {
         >
           ADD TO CART
         </Button>
-        {isAdmin && <Button variant="ghost"> Delete Item </Button>}
+        {isAdmin && <Button variant='plain'> Delete Item </Button>}
         <br></br>
-        {isAdmin && <Button variant="ghost" onClick={handleEdit}> Save Item </Button>}
+        {isAdmin && <Button variant="plain" onClick={handleEdit}> Save Item </Button>}
         <p>{cartMessage}</p>
       </div>
     </div>

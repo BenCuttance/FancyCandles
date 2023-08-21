@@ -115,7 +115,10 @@ const resolvers = {
     },
 
     deleteProduct: async (parent, { productId }) => {
-      return Product.findOneAndDelete({ _id: productId });
+
+      const product = await Product.findOneAndDelete({ _id: productId });
+    
+      return `Deleted ${product.name}`;
     },
 
     editProduct: async (parent, { productId, updatedProduct }, context) => {
