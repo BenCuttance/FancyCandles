@@ -1,6 +1,10 @@
 import React from 'react';
 import "./AddProduct.css";
 
+import {
+  ADD_PRODUCT,
+} from "../utils/actions";
+
 export default function Contact() {
   return (
     <div>
