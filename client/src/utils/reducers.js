@@ -11,6 +11,7 @@ import {
   CLEAR_CART,
   TOGGLE_CART,
   UPDATE_CURRENT_PRODUCT,
+  DELETE_PRODUCT,
 } from "./actions";
 
 export const reducer = (state, action) => {
@@ -93,6 +94,17 @@ export const reducer = (state, action) => {
         ...state,
         currentCategory: action.currentCategory,
       };
+
+    case DELETE_PRODUCT:
+        
+        const updatedProducts = state.products.filter(
+          (product) => product._id !== action.productId
+        );
+  
+        return {
+          ...state,
+          products: updatedProducts,
+        };
 
     default:
       return state;

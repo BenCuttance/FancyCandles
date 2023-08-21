@@ -1,18 +1,20 @@
+
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"; // Assuming you're using react-router-dom
-import { useQuery } from "@apollo/client"; // Assuming you're using Apollo Client
-import { useStoreContext } from "../utils/GlobalState"; // Assuming you have a store context
+import { useParams } from "react-router-dom"; 
+import { useMutation, useQuery } from "@apollo/client"; 
+import { useStoreContext } from "../utils/GlobalState"; 
 import {
   ADD_TO_CART,
   UPDATE_CART_QUANTITY,
   UPDATE_CURRENT_PRODUCT,
+  DELETE_PRODUCT,
+  EDIT_PRODUCT,
 } from "../utils/actions";
-import { idbPromise } from "../utils/helpers"; // Assuming you have a utility function for IndexedDB operations
-import Auth from "../utils/auth"; // Assuming you have an Auth utility
+import { idbPromise } from "../utils/helpers"; 
+import Auth from "../utils/auth";
 import Button from "../components/Button/Button";
 import "./ProductDetail.css";
 import { QUERY_PRODUCT } from "../utils/queries";
-// const QUERY_PRODUCT = "QUERY_PRODUCT";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -26,6 +28,27 @@ const ProductDetail = () => {
     }
   );
   const [state, dispatch] = useStoreContext();
+
+  // const [deleteProductMutation] = useMutation(DELETE_PRODUCT);
+
+  // const deleteProduct = async () => {
+  //   try {
+  //     await deleteProductMutation({
+  //       variables: {
+  //         productId: id,
+  //       },
+  //     });
+
+  //     dispatch({
+  //       type: DELETE_PRODUCT,
+  //       productId: id,
+  //     });
+
+  //     idbPromise("products", "delete", id);
+  //   } catch (error) {
+  //     console.error("Error deleting product:", error.message);
+  //   }
+  // }; 
 
   useEffect(() => {
     if (productData) {
