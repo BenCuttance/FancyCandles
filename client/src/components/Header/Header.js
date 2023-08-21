@@ -1,12 +1,25 @@
 import React, { useEffect } from "react";
 import Auth from "../../utils/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useStoreContext } from "../../utils/GlobalState";
-import { DECODE_TOKEN } from "../../utils/actions";
+import {
+  DECODE_TOKEN,
+  UPDATE_CATEGORIES,
+  UPDATE_CURRENT_CATEGORY,
+} from "../../utils/actions";
+import { QUERY_CATEGORIES } from "../../utils/queries";
+import { useQuery } from "@apollo/client";
+import { idbPromise } from "../../utils/helpers";
 
 export default function Header(props) {
   const [state, dispatch] = useStoreContext();
+
+  const navigate = useNavigate();
+
+  const { categories } = state;
+
+  const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 
   useEffect(() => {
     console.log("state", state);
@@ -16,20 +29,48 @@ export default function Header(props) {
     const token = localStorage.getItem("id_token");
     let decoded = Auth.getDecodedToken(token);
 
-  if (!state.user) {
+    if (!state.user) {
+      dispatch({
+        type: DECODE_TOKEN,
+        decoded,
+      });
+    }
+    return true;
+  };
+
+  useEffect(() => {
+    if (categoryData) {
+      dispatch({
+        type: UPDATE_CATEGORIES,
+        categories: categoryData.categories,
+      });
+      categoryData.categories.forEach((category) => {
+        idbPromise("categories", "put", category);
+      });
+    } else if (!loading) {
+      idbPromise("categories", "get").then((categories) => {
+        dispatch({
+          type: UPDATE_CATEGORIES,
+          categories: categories,
+        });
+      });
+    }
+  }, [categoryData, loading, dispatch]);
+
+  const handleClick = (id) => {
     dispatch({
-      type: DECODE_TOKEN,
-      decoded,
+      type: UPDATE_CURRENT_CATEGORY,
+      currentCategory: id,
     });
-  }
-  return true;
-};
+  };
 
   const renderTopNav = () => {
     if (Auth.loggedIn() && getToken()) {
       return (
         <div className="header-top-nav">
-          {state.user && state.user.isAdmin && <Link to="/addproduct"> Add product </Link>} 
+          {state.user && state.user.isAdmin && (
+            <Link to="/addproduct"> Add product </Link>
+          )}
           <Link to="/orderHistory">Order History</Link>
           <a href="/" onClick={() => Auth.logout()}>
             Logout
@@ -61,8 +102,21 @@ export default function Header(props) {
           <Link to="/" className="logo-link">
             <div className="header-logo">Fancy Candles</div>
           </Link>
-          {state.user && state.user.isAdmin && <Link to="/admin"> Admin View </Link>}
+          {state.user && state.user.isAdmin && (
+            <Link to="/admin"> Admin View </Link>
+          )}
           {renderTopNav()}
+        </div>
+        <div className="bottom">
+          {categories.map((category) => (
+            <Link
+              to={`/category/${category._id}`}
+              className="category-link"
+              onClick={() => handleClick(category._id)}
+            >
+              <div className="">{category.name}</div>
+            </Link>
+          ))}
         </div>
       </div>
     </div>

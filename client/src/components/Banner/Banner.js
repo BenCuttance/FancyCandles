@@ -1,10 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import "./Banner.css";
 
 const Banner = () => {
-  const navigate = useNavigate();
   return (
     <div className="banner-container">
       <img src="/images/home-banner.png" />

@@ -5,6 +5,6 @@
 }
 
 .content {
-  padding: 80px;
+  padding: 280px 80px 80px 80px;
   flex-grow: 1;
 }
