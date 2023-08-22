@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import Auth from "../../utils/auth";
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
@@ -95,7 +97,8 @@ export default function Header(props) {
         </div>
         <div>
           <Link to="/cart" className="header-cart-link">
-            My Cart
+            My Cart{" "}
+            <FontAwesomeIcon icon={faCartShopping} style={{ marginLeft: 5 }} />
           </Link>
         </div>
       </div>
