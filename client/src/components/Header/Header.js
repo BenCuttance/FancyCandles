@@ -107,9 +107,6 @@ export default function Header(props) {
           <Link to="/" className="logo-link">
             <div className="header-logo">Fancy Candles</div>
           </Link>
-          {state.user && state.user.isAdmin && (
-            <Link to="/admin"> Admin View </Link>
-          )}
           {renderTopNav()}
         </div>
         <div className="bottom">
