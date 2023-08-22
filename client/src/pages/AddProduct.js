@@ -1,27 +1,51 @@
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import "./AddProduct.css";
 
-import {
-  ADD_PRODUCT,
-} from "../utils/actions";
-
-const categoriesData = {
-  candle: "Candles",
-  diffuser: "Diffusers",
-  oil: "Oils",
-  gift: "Gifts",
-  homeware: "Homewares",
-};
+import { UPDATE_CATEGORIES } from "../utils/actions";
+import { QUERY_CATEGORIES } from "../utils/queries";
+import { ADD_PRODUCT as ADD_PRODUCT_MUTATION } from "../utils/mutations";
+import { idbPromise } from "../utils/helpers";
+import { useMutation, useQuery } from "@apollo/client";
+import { useStoreContext } from "../utils/GlobalState";
+import Button from "../components/Button/Button";
 
 export default function AddProduct() {
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [state, dispatch] = useStoreContext();
+
+  const { categories } = state;
+
+  const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
+  const [addProduct] = useMutation(ADD_PRODUCT_MUTATION);
+
+  useEffect(() => {
+    if (categoryData) {
+      dispatch({
+        type: UPDATE_CATEGORIES,
+        categories: categoryData.categories,
+      });
+      categoryData.categories.forEach((category) => {
+        idbPromise("categories", "put", category);
+      });
+    } else if (!loading) {
+      idbPromise("categories", "get").then((categories) => {
+        dispatch({
+          type: UPDATE_CATEGORIES,
+          categories: categories,
+        });
+      });
+    }
+  }, [categoryData, loading, dispatch]);
+
+  const [selectedCategory, setSelectedCategory] = useState(
+    categories?.[0]?._id || ""
+  );
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
-  const [productImage, setProductImage] = useState("");
+  // const [productImage, setProductImage] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productQuantity, setProductQuantity] = useState("");
 
+  const [formMessage, setFormMessage] = useState("");
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
@@ -35,96 +59,115 @@ export default function AddProduct() {
     setProductDescription(event.target.value);
   };
 
-  const handleProductImageChange = (event) => {
-    setProductDescription(event.target.value);
-  };
-  
+  // const handleProductImageChange = (event) => {
+  //   setProductDescription(event.target.value);
+  // };
+
   const handleProductPriceChange = (event) => {
-    setProductDescription(event.target.value);
+    setProductPrice(event.target.value);
   };
 
   const handleProductQuantityChange = (event) => {
-    setProductDescription(event.target.value);
+    setProductQuantity(event.target.value);
   };
 
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const newProduct = {
-      category: selectedCategory,
-      name: productName,
-      description: productDescription,
-      image: productImage,
-      price: productPrice,
-      quantity: productQuantity,
-    };
-    console.log("New product:", newProduct);
+    try {
+      const newProduct = {
+        category: selectedCategory,
+        name: productName,
+        description: productDescription,
+        // use a default image for now
+        image: "Diffuser-botanical.jpg",
+        price: Number.parseFloat(productPrice),
+        quantity: Number.parseInt(productQuantity),
+      };
+      await addProduct({
+        variables: newProduct,
+      });
+      setFormMessage("Product has been added.");
+    } catch (err) {
+      setFormMessage("Something went wrong. Please try again.");
+    }
   };
 
   return (
     <div>
-      <section className="page-section" id="contact">
-        <div className="container-contact">
-          <div className="row justify-content-center">
-            <div className="col-lg-8">
-              <div className="text-center">
-                <h2 className="heading">ADD Product</h2>
-                <hr className="divider" />
-              </div>
+      <h1 className="add-product-heading">Add Product</h1>
 
-              <form className="contact-form" id="contactForm" onSubmit={handleSubmit}>
-                <div className="form-floating mb-3">
-                  <input className="form-control" id="name" type="text" placeholder="Product name" required onChange={handleProductNameChange} />
-                  <label htmlFor="name">Product name</label>
-                </div>
-
-                <div className="form-floating mb-3">
-                  <input className="form-control" id="description" type="text" placeholder="Description" required onChange={handleProductDescriptionChange} />
-                  <label htmlFor="description">Description</label>
-                </div>
-
-                <div className="form-floating mb-3">
-                  <input className="form-control" id="name" type="text" placeholder="Image" required onChange={handleProductImageChange} />
-                  <label htmlFor="image">Image</label>
-                </div>
-                
-                <div className="form-floating mb-3">
-                  <input className="form-control" id="name" type="text" placeholder="Price" required onChange={handleProductPriceChange} />
-                  <label htmlFor="price">Price</label>
-                </div>
-
-                <div className="form-floating mb-3">
-                  <input className="form-control" id="name" type="text" placeholder="Quantity" required onChange={handleProductQuantityChange} />
-                  <label htmlFor="quantity">Quantity</label>
-                </div>
-
-                <div className="form-floating mb-3">
-                  <label htmlFor="category">Choose a category:</label>
-                  <select
-                    id="category"
-                    className="form-control"
-                    value={selectedCategory}
-                    onChange={handleCategoryChange}
-                  >
-                    <option value="">Select a category</option>
-                    {Object.keys(categoriesData).map((categoryId) => (
-                      <option key={categoryId} value={categoryId}>
-                        {categoriesData[categoryId]}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="d-grid">
-                  <button className="btn btn-primary btn-xl" id="submitButton" type="submit">
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
+      <form
+        className="add-product-form"
+        id="contactForm"
+        onSubmit={handleSubmit}
+      >
+        <div className="add-product-form-field">
+          <label htmlFor="name">Product name</label>
+          <input
+            className="form-control"
+            id="name"
+            type="text"
+            placeholder="Product name"
+            required
+            onChange={handleProductNameChange}
+          />
         </div>
-      </section>
+
+        <div className="add-product-form-field">
+          <label htmlFor="description">Description</label>
+          <input
+            className="form-control"
+            id="description"
+            type="text"
+            placeholder="Description"
+            required
+            onChange={handleProductDescriptionChange}
+          />
+        </div>
+
+        <div className="add-product-form-field">
+          <label htmlFor="price">Price</label>
+          <input
+            className="form-control"
+            id="name"
+            type="text"
+            placeholder="Price"
+            required
+            onChange={handleProductPriceChange}
+          />
+        </div>
+
+        <div className="add-product-form-field">
+          <label htmlFor="quantity">Quantity</label>
+          <input
+            className="form-control"
+            id="name"
+            type="text"
+            placeholder="Quantity"
+            required
+            onChange={handleProductQuantityChange}
+          />
+        </div>
+
+        <div className="add-product-form-field">
+          <label htmlFor="category">Choose a category</label>
+          <select
+            id="category"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+          >
+            {categories.map((category) => (
+              <option key={category._id} value={category._id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <Button type="submit">Submit</Button>
+
+        {formMessage && <div className="form-message">{formMessage}</div>}
+      </form>
     </div>
   );
 }

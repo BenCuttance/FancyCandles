@@ -116,6 +116,15 @@ input:focus, input:hover {
   border-bottom: 2px solid #121212;
 }
 
+select {
+  font-size: 16px;
+  border: 1px solid rgba(0,0,0,0.3);
+  outline: none;
+  padding: 10px;
+  transition: all 0.2s;
+  width: 100%;
+}
+
 .page-container {
   max-width: 1200px;
   margin-left: auto;
