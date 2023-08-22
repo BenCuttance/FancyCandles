@@ -41,7 +41,7 @@ export default function AddProduct() {
   );
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
-  // const [productImage, setProductImage] = useState("");
+  const [productImage, setProductImage] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productQuantity, setProductQuantity] = useState("");
 
@@ -59,9 +59,9 @@ export default function AddProduct() {
     setProductDescription(event.target.value);
   };
 
-  // const handleProductImageChange = (event) => {
-  //   setProductDescription(event.target.value);
-  // };
+   const handleProductImageChange = (event) => {
+     setProductImage(event.target.value);
+  };
 
   const handleProductPriceChange = (event) => {
     setProductPrice(event.target.value);
@@ -71,6 +71,7 @@ export default function AddProduct() {
     setProductQuantity(event.target.value);
   };
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -78,8 +79,7 @@ export default function AddProduct() {
         category: selectedCategory,
         name: productName,
         description: productDescription,
-        // use a default image for now
-        image: "Diffuser-botanical.jpg",
+        image: productImage,
         price: Number.parseFloat(productPrice),
         quantity: Number.parseInt(productQuantity),
       };
@@ -122,6 +122,18 @@ export default function AddProduct() {
             placeholder="Description"
             required
             onChange={handleProductDescriptionChange}
+          />
+        </div>
+
+        <div className="add-product-form-field">
+          <label htmlFor="image">Image</label>
+          <input
+            className="form-control"
+            id="image"
+            type="text"
+            placeholder="Image"
+            required
+            onChange={handleProductImageChange}
           />
         </div>
 
