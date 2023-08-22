@@ -66,33 +66,36 @@
 .product-name-input{
   font-size: 2rem;
   width: 100%;
-  border: none;
-  border-radius: 10px;
-  background-color: rgb(230, 227, 227);
   margin-bottom: 10px;
   padding: 10px;
-  box-sizing: border-box;
 }
 
 .product-description-input{
   font-size: 1.25rem;
-  width: 100%;
   height: 300px;
-  border: none;
-  border-radius: 10px;
-  background-color: rgb(230, 227, 227);
-  margin-bottom: 5px;
   padding: 10px;
-  box-sizing: border-box;
+  font-family: "Open Sans";
+  border: 1px solid rgba(0,0,0,0.3);
+  outline: none;
+  padding: 10px;
+  transition: all 0.2s;
+  width: 100%;
 }
 
-.product-price-input{
-  font-size: 1.25rem;
-  width: 25%;
-  border: none;
-  border-radius: 10px;
-  background-color: rgb(230, 227, 227);
-  margin-bottom: 10px;
-  padding: 10px;
-  box-sizing: border-box;
+.product-description-input:focus, .product-description-input:hover {
+  border-bottom: 2px solid #121212;
+}
+
+.product-price-input {
+  margin-bottom: 20px;
+}
+
+.product-delete-save {
+  margin-top: 20px;
+  display: flex;
+  justify-content: end;
+}
+
+.product-delete-save button {
+  margin-left: 20px;
 }
