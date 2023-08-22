@@ -11,10 +11,18 @@ import {
   CLEAR_CART,
   TOGGLE_CART,
   UPDATE_CURRENT_PRODUCT,
+  DELETE_PRODUCT,
+  
 } from "./actions";
 
 export const reducer = (state, action) => {
   switch (action.type) {
+    case DELETE_PRODUCT:
+      return{
+        ...state,
+        currentProduct: action.currentProduct
+      }
+
     case UPDATE_PRODUCTS:
       return {
         ...state,
@@ -97,6 +105,8 @@ export const reducer = (state, action) => {
     default:
       return state;
   }
+
+   
 };
 
 export function useProductReducer(initialState) {

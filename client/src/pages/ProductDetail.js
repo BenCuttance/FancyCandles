@@ -5,20 +5,23 @@ import { useParams } from "react-router-dom"; // Assuming you're using react-rou
 import { useQuery, useMutation } from "@apollo/client"; // Assuming you're using Apollo Client
 import { useStoreContext } from "../utils/GlobalState"; // Assuming you have a store context
 import {
+  DELETE_PRODUCT,
   ADD_TO_CART,
   UPDATE_CART_QUANTITY,
   UPDATE_CURRENT_PRODUCT,
 } from "../utils/actions";
-import { idbPromise } from "../utils/helpers"; // Assuming you have a utility function for IndexedDB operations
-import Auth from "../utils/auth"; // Assuming you have an Auth utility
+import { idbPromise } from "../utils/helpers"; 
+import Auth from "../utils/auth"; 
 import Button from "../components/Button/Button";
 import "./ProductDetail.css";
 import { QUERY_PRODUCT } from "../utils/queries";
 import { EDIT_PRODUCT } from "../utils/mutations";
 
-// const QUERY_PRODUCT = "QUERY_PRODUCT";
 
-// const [deleteProductMutation] = useMutation(DELETE_PRODUCT);
+
+
+
+
 // const deleteProduct = async () => {
 //   try {
 //     await deleteProductMutation({
@@ -47,6 +50,7 @@ const ProductDetail = () => {
       },
     }
   );
+  
   const [state, dispatch] = useStoreContext();
 
   useEffect(() => {
@@ -134,6 +138,8 @@ const ProductDetail = () => {
 
   const [editProduct] = useMutation(EDIT_PRODUCT);
 
+  const [formMessage, setFormMessage] = useState("");
+
   const handleEdit = async () => {
     const editResponse = await editProduct({
       variables: {
@@ -142,7 +148,20 @@ const ProductDetail = () => {
       },
     });
     console.log(editResponse);
+    setFormMessage("Product edited and saved")
   };
+
+  // const [deleteProduct] = useMutation(DELETE_PRODUCT);
+
+  // const handleDelete = async () => {
+  //   const deleteResponse = await deleteProduct({
+  //     variables: {
+  //       productId: currentProduct._id
+  //     }
+      
+  //   })
+  //   console.log(deleteResponse)
+  // }
 
   const getToken = () => {
     const token = localStorage.getItem("id_token");
@@ -193,15 +212,21 @@ const ProductDetail = () => {
         <Button variant="ghost" style={{ width: "100%" }} onClick={addToCart}>
           ADD TO CART
         </Button>
-        {isAdmin && (
+        {formMessage && <div className="form-message">{formMessage}</div>}
+        {isAdmin &&
+         (
           <div className="product-delete-save">
             <Button variant="plain">
-              <FontAwesomeIcon icon={faTrash} /> Delete Item
+              <FontAwesomeIcon icon={faTrash} 
+              /> Delete Item
             </Button>
             <Button variant="plain" onClick={handleEdit}>
               <FontAwesomeIcon icon={faFloppyDisk} /> Save Item
             </Button>
+            <br></br>
+            
           </div>
+          
         )}
         {cartMessage && <p>{cartMessage}</p>}
       </div>
