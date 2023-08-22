@@ -14,7 +14,7 @@
   display: flex;
   padding-bottom: 40px;
 
-  @media(max-width: 550px) {
+  @media(max-width: 900px) {
     flex-direction: column;
   }
 }
@@ -53,4 +53,21 @@
 .footer-section {
   margin-right: 80px;
   margin-bottom: 40px;
+}
+
+.footer-section-payment {
+  display: flex;
+  width: 400px;
+  flex-wrap: wrap;
+
+  @media(max-width: 550px) {
+    width: unset;
+  }
+}
+
+.footer-section-payment img {
+  height: 35px;
+  width: 85px;
+  margin-right: 10px;
+  margin-bottom: 10px;;
 }

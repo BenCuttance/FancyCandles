@@ -105,13 +105,11 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-//_____________ Products_________________________________
-    addProduct: async (parent, products , context) => {
-       console.log(products);
- 
-        const product = await Product.create( products );
+    //_____________ Products_________________________________
+    addProduct: async (parent, product, context) => {
+      const newProduct = await Product.create(product);
 
-        return await product.populate("category");
+      return newProduct.populate("category");
     },
 
     deleteProduct: async (parent, { productId }) => {
@@ -125,20 +123,18 @@ const resolvers = {
           { $set: updatedProduct },
           { new: true }
         );
-    
+
         if (!updatedProductDoc) {
           throw new Error("Product not found");
         }
-    
+
         return updatedProductDoc;
       } catch (error) {
         throw new Error(`Error editing product: ${error.message}`);
       }
     },
-    
-//_________________________________________________________
 
-
+    //_________________________________________________________
 
     updateUser: async (parent, args, context) => {
       if (context.user) {
@@ -176,10 +172,6 @@ const resolvers = {
       return { token, user };
     },
   },
-
-
-
-
 };
 
 module.exports = resolvers;

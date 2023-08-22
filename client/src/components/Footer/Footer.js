@@ -4,6 +4,16 @@ import { ReactComponent as Instagram } from "../../icons/instagram.svg";
 import { ReactComponent as Twitter } from "../../icons/twitter.svg";
 import "./Footer.css";
 
+const paymentImages = [
+  "mastercard",
+  "visa",
+  "amex",
+  "paypal",
+  "afterpay",
+  "applepay",
+  "googlepay",
+];
+
 export default function Footer() {
   return (
     <div className="footer-container">
@@ -26,6 +36,11 @@ export default function Footer() {
           <h5 className="footer-section-heading">
             Flexible &amp; Secure Payment Options
           </h5>
+          <div className="footer-section-content footer-section-payment">
+            {paymentImages.map((image) => (
+              <img src={`/images/${image}.png`} key={image} />
+            ))}
+          </div>
         </div>
       </div>
 

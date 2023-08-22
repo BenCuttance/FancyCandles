@@ -1,8 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import { useQuery } from '@apollo/client';
-import { QUERY_USER } from '../utils/queries';
+import { useQuery } from "@apollo/client";
+import { QUERY_USER } from "../utils/queries";
+
+import "./OrderHistory.css";
 
 function OrderHistory() {
   const { data } = useQuery(QUERY_USER);
@@ -14,28 +16,27 @@ function OrderHistory() {
 
   return (
     <>
-      <div className="container my-1">
-        <Link to="/">← Back to Products</Link>
-
+      <div className="">
         {user ? (
           <>
-            <h2>
-              Order History for {user.firstName} {user.lastName}
-            </h2>
+            <h1 className="order-history-heading">Order History</h1>
             {user.orders.map((order) => (
-              <div key={order._id} className="my-2">
-                <h3>
+              <div key={order._id} className="">
+                <h3 className="order-history-date">
                   {new Date(parseInt(order.purchaseDate)).toLocaleDateString()}
                 </h3>
-                <div className="flex-row">
+                <div className="order-history-order">
                   {order.products.map(({ _id, image, name, price }, index) => (
-                    <div key={index} className="card px-1 py-1">
-                      <Link to={`/products/${_id}`}>
+                    <div key={index} className="order-history-product">
+                      <Link
+                        to={`/products/${_id}`}
+                        className="order-history-product-link"
+                      >
                         <img alt={name} src={`/images/${image}`} />
-                        <p>{name}</p>
+                        <p className="order-history-product-name">{name}</p>
                       </Link>
-                      <div>
-                        <span>${price}</span>
+                      <div className="order-history-product-price">
+                        <span>AUD {price}</span>
                       </div>
                     </div>
                   ))}
