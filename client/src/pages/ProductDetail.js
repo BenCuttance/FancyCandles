@@ -15,26 +15,7 @@ import Button from "../components/Button/Button";
 import "./ProductDetail.css";
 import { QUERY_PRODUCT } from "../utils/queries";
 import { EDIT_PRODUCT } from "../utils/mutations";
-
-// const QUERY_PRODUCT = "QUERY_PRODUCT";
-
-// const [deleteProductMutation] = useMutation(DELETE_PRODUCT);
-// const deleteProduct = async () => {
-//   try {
-//     await deleteProductMutation({
-//       variables: {
-//         productId: id,
-//       },
-//     });
-//     dispatch({
-//       type: DELETE_PRODUCT,
-//       productId: id,
-//     });
-//     idbPromise("products", "delete", id);
-//   } catch (error) {
-//     console.error("Error deleting product:", error.message);
-//   }
-// };
+import { DELETE_PRODUCT } from "../utils/mutations";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -150,6 +131,24 @@ const ProductDetail = () => {
     return !!decoded;
   };
 
+
+  const [deleteProduct] = useMutation(DELETE_PRODUCT);
+
+  const handleDelete = async () => {
+    try {
+      const deleteResponse = await deleteProduct({
+        variables: {
+          productId: currentProduct._id,
+        },
+      });
+      console.log(deleteResponse);
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+  
+
+
   return (
     <div className="product-detail-page">
       <img src={`/images/${currentProduct.image}`} alt={currentProduct.name} />
@@ -195,7 +194,7 @@ const ProductDetail = () => {
         </Button>
         {isAdmin && (
           <div className="product-delete-save">
-            <Button variant="plain">
+            <Button variant="plain" onClick={handleDelete}>
               <FontAwesomeIcon icon={faTrash} /> Delete Item
             </Button>
             <Button variant="plain" onClick={handleEdit}>
