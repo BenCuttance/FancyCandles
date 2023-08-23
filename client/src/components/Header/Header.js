@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 import Auth from "../../utils/auth";
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
@@ -95,11 +95,17 @@ export default function Header(props) {
         <div className="header-promotion">
           Free standard delivery on orders over $79
         </div>
-        <div>
+        <div className="header-right">
           <Link to="/cart" className="header-cart-link">
             My Cart{" "}
             <FontAwesomeIcon icon={faCartShopping} style={{ marginLeft: 5 }} />
           </Link>
+          {state.user && (
+            <div className="header-username">
+              {state.user?.firstName}{" "}
+              <FontAwesomeIcon icon={faUser} style={{ marginLeft: 5 }} />
+            </div>
+          )}
         </div>
       </div>
       <div className="header-main">
