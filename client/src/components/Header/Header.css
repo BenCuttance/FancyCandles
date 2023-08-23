@@ -19,14 +19,14 @@
   justify-content: space-between;
   font-weight: 600;
 
-  @media(max-width: 550px) {
+  @media(max-width: 900px) {
     padding: 0 20px;
     justify-content: end;
   }
 }
 
 .header-promotion {
-  @media(max-width: 550px) {
+  @media(max-width: 900px) {
     display: none;
   }
 }
@@ -98,8 +98,19 @@
   }
 }
 
+.header-cart-bar .header-right {
+  display: flex;
+  align-items: center;
+}
+
 .header-cart-bar .header-cart-link {
   color: white;
+  margin-left: 40px;
+}
+
+.header-cart-bar .header-username {
+  color: white;
+  margin-left: 40px;
 }
 
 .header-cart-bar .header-cart-link:hover {
