@@ -27,6 +27,8 @@ const Category = () => {
       variables: {
         category: categoryId,
       },
+      // always make a request to backend instead of using client cache
+      fetchPolicy: "network-only",
     }
   );
 
