@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
-import { useParams } from "react-router-dom"; // Assuming you're using react-router-dom
+import { useNavigate, useParams } from "react-router-dom"; // Assuming you're using react-router-dom
 import { useQuery, useMutation } from "@apollo/client"; // Assuming you're using Apollo Client
 import { useStoreContext } from "../utils/GlobalState"; // Assuming you have a store context
 import {
@@ -29,6 +29,8 @@ const ProductDetail = () => {
     }
   );
   const [state, dispatch] = useStoreContext();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (productData) {
@@ -131,7 +133,6 @@ const ProductDetail = () => {
     return !!decoded;
   };
 
-
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
 
   const handleDelete = async () => {
@@ -141,13 +142,11 @@ const ProductDetail = () => {
           productId: currentProduct._id,
         },
       });
-      console.log(deleteResponse);
+      navigate(`/category/${currentProduct.category._id}`);
     } catch (error) {
       console.error("Error deleting product:", error);
     }
   };
-  
-
 
   return (
     <div className="product-detail-page">

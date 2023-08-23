@@ -113,7 +113,8 @@ const resolvers = {
     },
 
     deleteProduct: async (parent, { productId }) => {
-      return Product.findOneAndDelete({ _id: productId });
+      await Product.findOneAndDelete({ _id: productId });
+      return true;
     },
 
     editProduct: async (parent, { productId, updatedProduct }, context) => {
