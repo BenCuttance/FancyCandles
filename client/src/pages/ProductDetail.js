@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate, useParams } from "react-router-dom"; // Assuming you're using react-router-dom
+import { useParams } from "react-router-dom"; // Assuming you're using react-router-dom
 import { useQuery, useMutation } from "@apollo/client"; // Assuming you're using Apollo Client
 import { useStoreContext } from "../utils/GlobalState"; // Assuming you have a store context
 import {
@@ -15,7 +15,9 @@ import Button from "../components/Button/Button";
 import "./ProductDetail.css";
 import { QUERY_PRODUCT } from "../utils/queries";
 import { EDIT_PRODUCT } from "../utils/mutations";
-import { DELETE_PRODUCT } from "../utils/mutations";
+import { DELETE_PRODUCT} from "../utils/mutations";
+import { useNavigate } from "react-router-dom";
+
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -29,8 +31,6 @@ const ProductDetail = () => {
     }
   );
   const [state, dispatch] = useStoreContext();
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (productData) {
@@ -133,6 +133,7 @@ const ProductDetail = () => {
     return !!decoded;
   };
 
+
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
 
   const handleDelete = async () => {
@@ -142,11 +143,45 @@ const ProductDetail = () => {
           productId: currentProduct._id,
         },
       });
-      navigate(`/category/${currentProduct.category._id}`);
+      console.log(deleteResponse);
     } catch (error) {
       console.error("Error deleting product:", error);
     }
   };
+  
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const handleShowDeleteModal = () => {
+    setShowDeleteModal(true);
+  };
+
+  const handleCancelDelete = () => {
+    setShowDeleteModal(false);
+  };
+
+  const navigate = useNavigate();
+
+  const handleConfirmDelete = async () => {
+    try {
+      const deleteResponse = await deleteProduct({
+        variables: {
+          productId: currentProduct._id,
+        },
+      });
+
+      console.log(deleteResponse);
+
+      setShowDeleteModal(false);
+
+      navigate(`/category/${currentProduct.category._id}`);
+      window.location.reload();
+      
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+
 
   return (
     <div className="product-detail-page">
@@ -193,7 +228,7 @@ const ProductDetail = () => {
         </Button>
         {isAdmin && (
           <div className="product-delete-save">
-            <Button variant="plain" onClick={handleDelete}>
+            <Button variant="plain" onClick={handleShowDeleteModal}>
               <FontAwesomeIcon icon={faTrash} /> Delete Item
             </Button>
             <Button variant="plain" onClick={handleEdit}>
@@ -201,6 +236,16 @@ const ProductDetail = () => {
             </Button>
           </div>
         )}
+
+        {showDeleteModal && (
+        <div className="delete-modal">
+          <p>Are you sure you want to delete this product?</p>
+          <Button variant="plain" onClick={handleConfirmDelete}>OK</Button>
+          <Button variant="plain" onClick={handleCancelDelete}>Cancel</Button>
+        </div>
+      )}
+
+
         {cartMessage && <p>{cartMessage}</p>}
       </div>
     </div>
