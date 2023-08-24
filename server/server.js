@@ -41,6 +41,55 @@ const startApolloServer = async () => {
     })
   })
   };
+
+
+  // const path = require('path');
+  // const express = require('express');
+  // const helmet = require('helmet');
+  // const app = express();
+  	
+//   app.use(
+//   // [
+//   helmet.contentSecurityPolicy({
+// directives: {
+//  defaultSrc: ["'self'"],
+//  connectSrc: ["'self'", 'https://api.stripe.com'],
+//   frameSrc: ["'self'", 'https://js.stripe.com'],
+//  // childSrc: ["'self'", 'https://js.stripe.com'],
+//   scriptSrc: ["'self'", 'https://js.stripe.com', "'unsafe-inline'"],
+//   styleSrc: ['https://js.stripe.com'],
+//   fontSrc: ['https://js.stripe.com'],
+//    imgSrc: ["'self'", 'https://js.stripe.com'],
+//      }
+//     })
+//   20	  // helmet.noCache()
+//   21	// ]
+//   22	);
+//   23	
+//   24	app.use((req, res, next) => {
+//   25	  console.log('CSP', res.get('Content-Security-Policy'));
+//   26	  next();
+//   27	});
+//   28	
+//   29	
+//   30	// app.use(express.static('public', {
+//   31	//   etag: false, 
+//   32	//   maxage: '0'
+//   33	// }));
+//   34	
+//   35	app.use('/', (req, res) => {
+//   36	  res.sendFile(path.join(__dirname, 'public/index.html'));
+//   37	});
+//   38	
+//   39	app.listen(5000, () => {
+//   40	  console.log('listening');
+//   41	});
+
+
+
+
+
+
   
 // Call the async function to start the server
   startApolloServer();
