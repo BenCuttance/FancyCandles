@@ -2,7 +2,7 @@
 
 ## Deployment Link 
 
-Heroku deployment link: 
+Heroku link: https://tranquil-springs-18915-4201a64f92ba.herokuapp.com/
 
 ## Description 
 
