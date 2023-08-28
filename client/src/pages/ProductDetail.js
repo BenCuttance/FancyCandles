@@ -174,7 +174,7 @@ const ProductDetail = () => {
 
       setShowDeleteModal(false);
 
-      navigate(`/category/${currentProduct.category._id}`);
+      navigate(`/`);
       window.location.reload();
       
     } catch (error) {
